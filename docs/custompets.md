@@ -3,6 +3,7 @@
 You can now create your own custom pets!
 
 ## TLDR;
+### macOS
 1. Click on a pet you like and export it (see below)
 1. Modify the json file the sprites as you see fit
 1. Double check filename (see [sprites section](#sprites))
@@ -12,40 +13,9 @@ You can now create your own custom pets!
 
 I've also made a (terrible) tutorial, you can find it [on YouTube](https://www.youtube.com/watch?v=Mj4U2GIF8MA)! 
 
-## Breaking changes in version 2.40
-...Sorry!
+### Windows
 
-### Explicit Capabilities
-Starting with version 2.40, certain capabilities are not added by the app automatically anymore.
-
-These are:
-* `Gravity` - Allows pets to fall to the bottom of the screen
-* `RandomPlatformJumper` - Allows pets to fly on top of windows
-* `Draggable` - Allows pets to be dragged with the mouse
-* `ShowsMenuOnRightClick` - Allows pets to be right-clicked to open a menu
-
-Updating your custom pets is very easy:
-1. Export them from the app
-1. Delete them from the app
-1. Edit the json file and add the new items to the list of capabilities
-1. Re-import the pet
-1. Done!
-
-See [Species Definition](#species definition) for an example.
-
-### Animation Position
-Starting with version 2.40, the app will stop supporting the legacy format of the `position` parameter.
-
-Updating is easy, just change your animations position from the old format:
-``` json
-"position": { "fromEntityBottomLeft": {} },
-```
-To the new one:
-``` json
-"position": "fromEntityBottomLeft"
-```
-
-You will need to delete your pet from the app and re-import it.
+Windows doesn't support all capabilities (it will just ignore unknown ones) yet, doesn't allow exporting pets and does not have drag and drop system, but you can simply access the `PetAssets` or `Species` folders and add, modify or delete whatever it's in there!
 
 ## Setup
 You only need two things: 
@@ -59,7 +29,7 @@ A `Species` is defined by the following:
 * A unique id
 * A list of Capabilities
 * A list of Animations
-* Other attributes, such as speed
+* Other attributes, such as speed or scale 
 
 All of these need to be defined in a json file, for example:
 
@@ -70,6 +40,7 @@ All of these need to be defined in a json file, for example:
   "fallPath": "drag",
   "fps": 10,
   "zIndex": 0,
+  "scale": 1,
   "tags": ["jungle"],
   "movementPath": "walk",
   "speed": 0.7,

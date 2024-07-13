@@ -3,10 +3,11 @@ This is the source code of my macOS app [BitTherapy](https://apps.apple.com/app/
 
 Like the app? Join our [Discord](https://discord.gg/MCdEgXKSH5)!
 
-## 🎮 Supported Systems
-The app is currently available for macOS only via the [App Store](https://apps.apple.com/app/id1575542220).
-
-Is this coming to Windows or Linux? _Possibly_...
+## 🎮 Latest Releases & Supported System
+|OS|Store|Binaries|Build from Source|
+|---|---|---|---|
+|macOS|[App Store](https://apps.apple.com/app/id1575542220)|n/a|[See instructions](#build-macos)|
+|Windows (Beta)|Some day!|[Latest Beta](https://github.com/curzel-it/bit-therapy/releases/tag/windows-v1.0.0)|[See instructions](#build-windows)|
 
 I'm currently rewriting the app in [C++](https://github.com/curzel-it/bit-therapy-cpp) with QT, the primary goal is to learn more about the language.
 
@@ -17,21 +18,14 @@ The most popular one was probably the [eSheep](https://github.com/Adrianotiger/d
 
 Hope you like them too!
 
-## 📲 Get the app
-For daily use I recommend getting the App from the App Store.
-
-Alternatively, you can download the latest release from [GitHub](https://github.com/curzel-it/bit-therapy/releases/latest) or build from source (see below).
-
-[![Get it on the App Store](docs/appstore_badge.png)](https://apps.apple.com/app/id1575542220)
-
-## 🔥 Screenshots
+## 🔥 Screenshots (macOS)
 ![Homepage, light mode](docs/1.png)
 ![Settings, dark mode](docs/2.png)
 
 ## 🎨 Create custom pets
 Starting from version 2.20 you can now create custom pets, please check [the documentation](https://curzel.it/bit-therapy/custompets).
 
-You do not need any programming knowledge or Xcode to create your own pets, just design your characters and follow [the instructions](https://curzel.it/bit-therapy/custompets), good luck!
+You do not need any programming knowledge or dev tools to create your own pets, just design your characters and follow [the instructions](https://curzel.it/bit-therapy/custompets), good luck!
 
 ## 🙏 Contribute
 Contributors get a shout out in the app, just saying... 😏
@@ -79,10 +73,29 @@ if __name__ == "__main__":
 ```
 
 ## 🛠️ Build from Source
+### macOS
+<a name="build-macos"></a>
 1. Download and setup Xcode
 1. Open the `Sources/swift/BitTherapy.xcworkspace`
-1. Give Xcode some time to figure out dependencies...
 1. Run
+
+### Windows
+<a name="build-windows"></a>
+1. Download and setup Visual Studio 2022
+1. Open the `Sources/windows/BitTherapy.sln`
+1. Run
+
+## FAQ
+### Linux Support?
+The app works by creating a transparent full screen window, which displays a bunch of sprites.
+
+The app relies on the fact that both macOS and Windows discards events (such as mouse clicks) that happen on a completely trasparent porting of the window. This way, the app is unable to track events and doens't get in the way of you using other apps.
+
+* Can this work on Linux? Sure
+* Have you tried Wine? Not yet (chances of success do seem quite low)
+* Do I want to figure out how to make this work on X or Wayland? Nope....
+
+Sorry!
 
 ## About me
 I have a [YouTube Channel](https://www.youtube.com/@HiddenMugs) which has been gathering lots of dust lately.

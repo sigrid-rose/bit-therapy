@@ -9,7 +9,7 @@ Like the app? Join our [Discord](https://discord.gg/MCdEgXKSH5)!
 |macOS|[App Store](https://apps.apple.com/app/id1575542220)|n/a|[See instructions](#build-macos)|
 |Windows (Beta)|Some day!|[Latest Beta](https://github.com/curzel-it/bit-therapy/releases/tag/windows-v1.0.0)|[See instructions](#build-windows)|
 
-I'm currently rewriting the app in [C++](https://github.com/curzel-it/bit-therapy-cpp) with QT, the primary goal is to learn more about the language.
+The Windows port of the app has been written with C#/WinForms from scratch and it's still missing quite a lot of features, but will get there eventually. It's currently in Beta and has only been tested on Windows 11 amd64.
 
 ## 🤔 What's a Desktop Pet?
 It's just a cute little pet or animal that lives in your computer.
@@ -33,12 +33,7 @@ Contributors get a shout out in the app, just saying... 😏
 
 If you wish to improve support for your language, join our [Discord](https://discord.gg/MCdEgXKSH5) and let us know!
 
-## ⛓️ Command Line
-* For integrating with the App Store / production app, see [interoperability](#interoperability)
-* For using it as a command line tool, see [the C++ / QT version](https://github.com/curzel-it/bit-therapy-cpp)
-
 ## 🔔 Interoperability 
-<a name="interoperability"></a>
 Since version 2.48 you can use `DistributedNotificationCenter` to send basic commands to your pets.
 
 Here's the payload:

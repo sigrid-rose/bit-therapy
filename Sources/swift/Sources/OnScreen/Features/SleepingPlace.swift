@@ -44,7 +44,7 @@ class SleepingPlace: Capability {
         gravity?.isEnabled = false
         entity.animationsScheduler?.load(sleep, times: loops)
                 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
             gravity?.isEnabled = wasGravityEnabled
         }
     }

@@ -1,6 +1,10 @@
 import Foundation
 
 class SleepingPlace: Capability {
+    @Inject private var appConfig: AppConfig
+    
+    private var blacklistedEntities = Set<String>()
+    
     override func install(on subject: Entity) {
         super.install(on: subject)
         subject.frame.size = CGSize(
@@ -12,22 +16,37 @@ class SleepingPlace: Capability {
     override func doUpdate(with collisions: Collisions, after time: TimeInterval) {
         guard subject?.state == .move else { return }
         guard let entity = overlappingEntityThatCanSleep(from: collisions) else { return }
+        let entityId = entity.id
         putToSleep(entity)
-        isEnabled = false
+        blacklistedEntities.insert(entityId)
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 120) { [weak self] in
-            self?.isEnabled = true
+            self?.blacklistedEntities.remove(entityId)
+            self?.blacklistedEntities.remove(entityId)
+            self?.blacklistedEntities.remove(entityId)
+            self?.blacklistedEntities.remove(entityId)
         }
     }
 
     private func putToSleep(_ entity: Entity) {
         guard let bed = subject else { return }
         guard let sleep = entity.sleepAnimation() else { return }
+        
         let loops = sleepLoops(for: entity)
+        weak var gravity = entity.capability(for: Gravity.self)
+        let wasGravityEnabled = gravity?.isEnabled ?? false
+        let scale = appConfig.petSize / PetSize.defaultSize
+        
         entity.frame.origin = CGPoint(
             x: bed.frame.center.x - entity.frame.width / 2,
-            y: bed.frame.maxY - entity.frame.height
+            y: bed.frame.maxY - entity.frame.height - (bed.sleepOffsetY * scale)
         )
+        gravity?.isEnabled = false
         entity.animationsScheduler?.load(sleep, times: loops)
+                
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            gravity?.isEnabled = wasGravityEnabled
+        }
     }
 
     private func overlappingEntityThatCanSleep(from collisions: Collisions) -> Entity? {
@@ -44,6 +63,12 @@ class SleepingPlace: Capability {
 }
 
 private extension Entity {
+    var sleepOffsetY: CGFloat {
+        guard let valueString = species.params["sleepOffsetY"] else { return 0 }
+        guard let valueFloat = Float(valueString) else { return 0 }
+        return CGFloat(valueFloat)
+    }
+    
     func sleepAnimation() -> EntityAnimation? {
         species.animations.first { $0.id == "sleep" }
     }

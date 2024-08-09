@@ -11,6 +11,7 @@ public struct Species: Codable, Hashable {
     public let scale: CGFloat
     public let speed: CGFloat
     public let tags: [String]
+    public let params: [String: String]
     public let zIndex: Int
 
     public init(
@@ -23,7 +24,8 @@ public struct Species: Codable, Hashable {
         movementPath: String = "walk",
         speed: CGFloat = 1,
         tags: [String] = [],
-        zIndex: Int = 0
+        zIndex: Int = 0,
+        params: [String: String] = [:]
     ) {
         self.id = id
         self.animations = animations
@@ -36,6 +38,7 @@ public struct Species: Codable, Hashable {
         self.speed = speed
         self.tags = tags
         self.zIndex = zIndex
+        self.params = params
     }
 
     public init(from decoder: Decoder) throws {
@@ -50,6 +53,7 @@ public struct Species: Codable, Hashable {
         speed = try container.decode(CGFloat.self, forKey: .speed)
         tags = try container.decode([String].self, forKey: .tags)
         zIndex = try container.decode(Int.self, forKey: .zIndex)
+        params = (try? container.decode([String: String].self, forKey: .params)) ?? [:]
 
         if let fallPath = try? container.decode(String.self, forKey: .fallPath) {
             self.fallPath = fallPath

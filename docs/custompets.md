@@ -4,7 +4,7 @@ You can now create your own custom pets!
 
 ## TLDR;
 ### macOS
-1. Click on a pet you like and export it (see below)
+1. Click on a pet you like and export it (white cat)
 1. Modify the json file the sprites as you see fit
 1. Double check filename (see [sprites section](#sprites))
 1. Zip everything
